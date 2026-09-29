@@ -50,8 +50,8 @@ const TERRA = {
   },
 
   storage: {
-    db_host:       "postgis-terra-gj04.internal",
-    db_name:       "postgis_terra_gj04",
+    db_host:       "postgis-kshetra-gj04.internal",
+    db_name:       "postgis_kshetra_gj04",
     table:         "cadastral_parcels_gj04",
     srid:          "EPSG:32643",
     geom_type:     "MULTIPOLYGON",
