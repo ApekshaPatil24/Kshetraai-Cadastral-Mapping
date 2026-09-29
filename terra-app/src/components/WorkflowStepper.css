@@ -1,0 +1,147 @@
+.workflow-stepper {
+  height: 44px;
+  background: #0B2B27;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--sp-6);
+  gap: 0;
+  flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  z-index: 199;
+}
+.workflow-stepper::-webkit-scrollbar {
+  display: none;
+}
+
+.wf-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.wf-stage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: var(--r-sm);
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.wf-stage:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.wf-indicator {
+  width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  color: transparent;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.wf-indicator svg {
+  width: 8px;
+  height: 8px;
+  stroke-width: 4;
+}
+
+.wf-text {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.wf-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.25);
+  transition: color 0.15s;
+}
+
+.wf-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  transition: color 0.15s;
+}
+
+/* UPCOMING (default state falls here) */
+
+/* COMPLETED */
+.wf-stage--completed .wf-indicator {
+  border-color: transparent;
+  background: transparent;
+  color: var(--c-secondary);
+}
+.wf-stage--completed .wf-num {
+  color: rgba(255, 255, 255, 0.15);
+}
+.wf-stage--completed .wf-label {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* CURRENT */
+.wf-stage--current .wf-indicator {
+  border-color: var(--c-cyan);
+  background: var(--c-cyan);
+}
+.wf-stage--current .wf-num {
+  color: var(--c-cyan);
+}
+.wf-stage--current .wf-label {
+  color: #fff;
+  font-weight: 800;
+}
+
+/* WARNING */
+.wf-stage--warning .wf-indicator {
+  border-color: var(--c-amber);
+  background: rgba(217, 173, 88, 0.2);
+}
+.wf-stage--warning .wf-num {
+  color: var(--c-amber);
+}
+.wf-stage--warning .wf-label {
+  color: var(--c-amber);
+}
+
+/* PROBLEM */
+.wf-stage--problem .wf-indicator {
+  border-color: var(--c-coral);
+  background: var(--c-coral);
+}
+.wf-stage--problem .wf-num {
+  color: var(--c-coral);
+}
+.wf-stage--problem .wf-label {
+  color: var(--c-coral);
+}
+
+/* CONNECTOR */
+.wf-connector {
+  width: 14px;
+  height: 1.5px;
+  flex-shrink: 0;
+  margin: 0 4px;
+  transition: background 0.15s;
+}
+.wf-connector--idle {
+  background: rgba(255, 255, 255, 0.05);
+}
+.wf-connector--done {
+  background: rgba(78, 143, 115, 0.3);
+}

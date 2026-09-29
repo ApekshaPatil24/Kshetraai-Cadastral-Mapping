@@ -1,0 +1,91 @@
+/* ============================================================
+   KshetraAI — Design Tokens + Global Reset
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Brand Colors */
+  --c-primary:       #103F3A;
+  --c-secondary:     #4E8F73;
+  --c-cyan:          #5AAEBC;
+  --c-amber:         #D9AD58;
+  --c-mist:          #F3F7F2;
+  --c-white:         #FFFFFF;
+  --c-ink:           #162522;
+  --c-ink-muted:     #657572;
+  --c-warning:       #D5A347;
+  --c-coral:         #CF655C;
+  --c-gis-blue:      #4B82B8;
+
+  /* Surfaces */
+  --surface-bg:      #EFF3EE;
+  --surface-panel:   #FFFFFF;
+  --surface-header:  #103F3A;
+  --surface-sidebar: #0D3430;
+
+  /* Borders */
+  --border:          rgba(16,63,58,0.11);
+  --border-strong:   rgba(16,63,58,0.22);
+
+  /* Typography */
+  --font:            'Inter', -apple-system, sans-serif;
+  --font-mono:       'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* Spacing */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+
+  /* Radius (Controlled & Technical) */
+  --r-sm: 2px; --r-md: 4px; --r-lg: 6px; --r-xl: 8px;
+
+  /* Shadows (Subtle, restrained depth) */
+  --shadow-sm: 0 1px 2px rgba(16,63,58,0.04);
+  --shadow-md: 0 4px 12px rgba(16,63,58,0.06);
+
+  /* Layout */
+  --header-h:   52px;
+  --workflow-h: 44px;
+  --statusbar-h:28px;
+  --sidebar-w:  224px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--c-ink);
+  background: var(--surface-bg);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='900'%3E%3Cline x1='150' y1='0' x2='150' y2='900' stroke='rgba(16,63,58,0.02)' stroke-width='1'/%3E%3Cline x1='750' y1='0' x2='750' y2='900' stroke='rgba(16,63,58,0.015)' stroke-width='1'/%3E%3Cline x1='0' y1='250' x2='1200' y2='250' stroke='rgba(16,63,58,0.02)' stroke-width='1'/%3E%3Cline x1='0' y1='700' x2='1200' y2='700' stroke='rgba(16,63,58,0.015)' stroke-width='1'/%3E%3Crect x='150' y='250' width='600' height='450' fill='none' stroke='rgba(16,63,58,0.02)' stroke-width='1'/%3E%3Crect x='850' y='300' width='250' height='200' fill='none' stroke='rgba(16,63,58,0.015)' stroke-width='1'/%3E%3Cpath d='M140 250 L160 250 M150 240 L150 260' stroke='rgba(16,63,58,0.04)' stroke-width='1'/%3E%3Cpath d='M740 250 L760 250 M750 240 L750 260' stroke='rgba(16,63,58,0.03)' stroke-width='1'/%3E%3Cpath d='M140 700 L160 700 M150 690 L150 710' stroke='rgba(16,63,58,0.03)' stroke-width='1'/%3E%3Cpath d='M740 700 L760 700 M750 690 L750 710' stroke='rgba(16,63,58,0.03)' stroke-width='1'/%3E%3C/svg%3E");
+  background-position: center top;
+  background-attachment: fixed;
+  animation: fade-bg 20s infinite alternate;
+}
+
+@keyframes fade-bg {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(16,63,58,0.14); border-radius: 3px; }
+
+/* Animation */
+@keyframes pulse-dot {
+  0%,100% { opacity:1; }
+  50%      { opacity:0.45; }
+}

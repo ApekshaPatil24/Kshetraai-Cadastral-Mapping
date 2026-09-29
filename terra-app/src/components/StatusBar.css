@@ -1,0 +1,29 @@
+.status-bar {
+  height: var(--statusbar-h);
+  background: var(--surface-panel);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--sp-5);
+  gap: var(--sp-2);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 100;
+}
+
+.sb2-screen {
+  font-size: 11px; font-weight: 700;
+  color: var(--c-ink); letter-spacing: .01em;
+}
+.sb2-sep { font-size: 11px; color: var(--border-strong); margin: 0 2px; }
+.sb2-mission { font-size: 11px; font-weight: 500; color: var(--c-ink-muted); }
+.sb2-dot-sep {
+  width: 3px; height: 3px; border-radius: 50%;
+  background: var(--border-strong); flex-shrink: 0; margin: 0 4px;
+}
+.sb2-item { display: flex; align-items: center; gap: 4px; }
+.sb2-lbl { font-size: 10px; font-weight: 600; color: var(--c-ink-muted); text-transform: uppercase; letter-spacing: .05em; }
+.sb2-val { font-size: 11px; font-weight: 800; }
+.sb2-spacer { flex: 1; }
+.sb2-stage { font-size: 10px; font-weight: 700; color: var(--c-ink-muted); letter-spacing:.04em; text-transform: uppercase; }
+.sb2-crs { font-size: 10px; font-weight: 700; color: var(--c-gis-blue); font-family: var(--font-mono); }

@@ -1,0 +1,901 @@
+/* ============================================================
+   TERRA-CADASTRAL AI — Screen-specific styles
+   ============================================================ */
+
+/* ── S09 Web GIS View ─────────────────────────────────────── */
+.webgis-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  height: 100%;
+}
+
+.webgis-map-area {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+#leaflet-map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Map overlaid controls */
+.map-toolbar {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.map-toolbar-btn {
+  width: 32px;
+  height: 32px;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: var(--shadow-sm);
+  color: var(--color-ink);
+}
+
+.map-toolbar-btn:hover {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.map-toolbar-btn svg { width: 14px; height: 14px; }
+
+.map-toolbar-separator {
+  height: 1px;
+  background: var(--border-color);
+  margin: 2px 4px;
+}
+
+.map-layers-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 500;
+  background: rgba(255,255,255,0.96);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  box-shadow: var(--shadow-md);
+  min-width: 160px;
+}
+
+.map-layer-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-ink-muted);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.map-layer-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.map-layer-swatch {
+  width: 14px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  border: 1.5px solid transparent;
+}
+
+.map-layer-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.map-layer-count {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-ink-muted);
+}
+
+.map-coord-bar {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  background: rgba(22,37,34,0.82);
+  color: rgba(255,255,255,0.8);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  pointer-events: none;
+  font-family: var(--font-mono, monospace);
+}
+
+/* GIS right panel */
+.webgis-right-panel {
+  width: 300px;
+  flex-shrink: 0;
+  background: var(--surface-panel);
+  border-left: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.gis-panel-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.gis-tab {
+  flex: 1;
+  padding: 10px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-ink-muted);
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s;
+}
+
+.gis-tab:hover { color: var(--color-ink); }
+
+.gis-tab.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.gis-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-4);
+}
+
+.gis-panel-body.hidden { display: none; }
+
+/* Parcel info card */
+.parcel-info-card {
+  background: var(--color-mist);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+
+.parcel-info-id {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--space-2);
+  letter-spacing: 0.02em;
+}
+
+.parcel-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.parcel-info-row:last-child { border-bottom: none; }
+
+.parcel-info-key {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.parcel-info-val {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+/* Stats summary in GIS panel */
+.gis-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.gis-stat-box {
+  background: var(--color-mist);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  text-align: center;
+}
+
+.gis-stat-val {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-ink);
+  line-height: 1;
+}
+
+.gis-stat-lbl {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-ink-muted);
+  margin-top: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Confidence mini bar */
+.conf-bar-wrap {
+  margin-bottom: var(--space-3);
+}
+
+.conf-bar-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.conf-bar-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.conf-bar-pct {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.conf-bar-track {
+  height: 5px;
+  background: var(--border-color);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.conf-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* ── S01 Acquisition ──────────────────────────────────────── */
+.acquisition-layout {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: var(--space-6);
+  gap: var(--space-6);
+}
+
+.acq-mission-header {
+  background: var(--surface-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  gap: var(--space-8);
+  align-items: flex-start;
+}
+
+.acq-mission-badge {
+  background: var(--color-primary);
+  color: white;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  min-width: 130px;
+  flex-shrink: 0;
+}
+
+.acq-mission-badge-id {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-cyan);
+  text-transform: uppercase;
+}
+
+.acq-mission-badge-main {
+  font-size: 22px;
+  font-weight: 800;
+  margin-top: 4px;
+  letter-spacing: -0.01em;
+}
+
+.acq-mission-badge-sub {
+  font-size: 10px;
+  font-weight: 500;
+  opacity: 0.65;
+  margin-top: 2px;
+}
+
+.acq-mission-meta {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+
+.acq-meta-item {}
+
+.acq-meta-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-ink-muted);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.acq-meta-value {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.acq-meta-value.highlight {
+  color: var(--color-secondary);
+  font-weight: 700;
+}
+
+.acq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+/* ── S02 Preprocess ───────────────────────────────────────── */
+.preprocess-layout {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: var(--space-6);
+  gap: var(--space-5);
+}
+
+.pipeline-stage-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  background: var(--surface-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+}
+
+.pipeline-stage-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(78,143,115,0.1);
+  border: 1.5px solid var(--color-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-secondary);
+  flex-shrink: 0;
+}
+
+.pipeline-stage-label {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-ink);
+  flex: 1;
+}
+
+.pipeline-stage-output {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-ink-muted);
+  flex: 2;
+}
+
+.pipeline-stage-time {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-ink-muted);
+  font-family: var(--font-mono, monospace);
+  min-width: 110px;
+  text-align: right;
+}
+
+/* ── S06 Topology ─────────────────────────────────────────── */
+.topology-layout {
+  display: flex;
+  overflow: hidden;
+  height: 100%;
+}
+
+.topo-list {
+  width: 340px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-panel);
+}
+
+.topo-list-header {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.topo-error-item {
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.topo-error-item:hover { background: var(--color-mist); }
+.topo-error-item.selected { background: rgba(90,174,188,0.06); border-left: 3px solid var(--color-cyan); }
+
+.topo-error-id {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-ink-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.topo-error-type {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: 2px 0;
+}
+
+.topo-error-parcels {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-ink-muted);
+}
+
+.topo-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#topo-map {
+  flex: 1;
+}
+
+.topo-detail-panel {
+  height: 180px;
+  border-top: 1px solid var(--border-color);
+  background: var(--surface-panel);
+  padding: var(--space-4) var(--space-5);
+  overflow-y: auto;
+}
+
+/* ── S07 Confidence ───────────────────────────────────────── */
+.confidence-layout {
+  display: flex;
+  overflow: hidden;
+  height: 100%;
+}
+
+.conf-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-color);
+  background: var(--surface-panel);
+  overflow-y: auto;
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.conf-main {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-5) var(--space-6);
+}
+
+.conf-donut-container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.conf-donut-canvas {
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+}
+
+/* ── S08 Storage ──────────────────────────────────────────── */
+.storage-layout {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: var(--space-6);
+  gap: var(--space-5);
+}
+
+.storage-db-header {
+  background: linear-gradient(135deg, #0a2d29 0%, #103F3A 100%);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  color: white;
+  display: flex;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.db-icon-wrap {
+  width: 56px;
+  height: 56px;
+  background: rgba(90,174,188,0.15);
+  border: 1.5px solid rgba(90,174,188,0.35);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.db-icon-wrap svg {
+  width: 24px;
+  height: 24px;
+  color: var(--color-cyan);
+}
+
+.db-meta { flex: 1; }
+
+.db-name {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.db-detail {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: rgba(255,255,255,0.55);
+  margin-top: 3px;
+}
+
+.db-stat-row {
+  display: flex;
+  gap: var(--space-5);
+}
+
+.db-stat {
+  text-align: center;
+}
+
+.db-stat-val {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-cyan);
+}
+
+.db-stat-lbl {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sql-block {
+  background: #0f1e1c;
+  border: 1px solid rgba(90,174,188,0.15);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.7;
+  overflow-x: auto;
+}
+
+.sql-block .kw { color: var(--color-cyan); font-weight: 600; }
+.sql-block .fn { color: var(--color-amber); }
+.sql-block .str { color: var(--color-secondary); }
+.sql-block .cm { color: rgba(255,255,255,0.3); }
+
+/* ── S10 Human Review ─────────────────────────────────────── */
+.review-layout {
+  display: flex;
+  overflow: hidden;
+  height: 100%;
+}
+
+.review-queue {
+  width: 320px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-color);
+  background: var(--surface-panel);
+  display: flex;
+  flex-direction: column;
+}
+
+.review-queue-header {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.review-queue-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.review-item {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background 0.12s;
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.review-item:hover { background: var(--color-mist); }
+.review-item.selected { background: rgba(90,174,188,0.06); }
+
+.review-item-marker {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.review-item-body { flex: 1; }
+
+.review-item-id {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-ink);
+  letter-spacing: 0.03em;
+}
+
+.review-item-issue {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-ink-muted);
+  margin-top: 1px;
+}
+
+.review-item-conf {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-ink-muted);
+}
+
+.review-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#review-map {
+  flex: 1;
+}
+
+.review-action-bar {
+  border-top: 1px solid var(--border-color);
+  background: var(--surface-panel);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.review-action-info {
+  flex: 1;
+}
+
+.review-action-parcel-id {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.review-action-issue {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-ink-muted);
+}
+
+/* ── S11 Export ───────────────────────────────────────────── */
+.export-layout {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: var(--space-6);
+  gap: var(--space-5);
+}
+
+.export-fmt-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  background: var(--surface-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.15s;
+}
+
+.export-fmt-row:hover { border-color: var(--border-strong); }
+
+.export-fmt-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--color-mist);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.export-fmt-icon svg { width: 18px; height: 18px; color: var(--color-primary); }
+
+.export-fmt-name {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-ink);
+  min-width: 200px;
+}
+
+.export-fmt-standard {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-ink-muted);
+  flex: 1;
+}
+
+.export-fmt-srid {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-gis-blue);
+  font-family: var(--font-mono, monospace);
+  min-width: 100px;
+}
+
+.export-fmt-size {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-ink-muted);
+  min-width: 70px;
+  text-align: right;
+}
+
+/* ── S05 Parcels table ────────────────────────────────────── */
+.parcels-layout {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+}
+
+.parcels-table-wrap {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--color-mist);
+  padding: 9px 16px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.data-table tbody td {
+  padding: 9px 16px;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-ink);
+  border-bottom: 1px solid rgba(16,63,58,0.05);
+  white-space: nowrap;
+}
+
+.data-table tbody tr:hover td {
+  background: rgba(243,247,242,0.8);
+}
+
+.data-table .td-mono {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+}
+
+/* ── Confidence meter ────────────────────────────────────── */
+.conf-meter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.conf-meter-bar {
+  width: 50px;
+  height: 4px;
+  background: var(--border-color);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.conf-meter-fill {
+  height: 100%;
+  border-radius: 2px;
+}
+
+.conf-meter-val {
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 34px;
+}
+
+/* ── General layout helpers ──────────────────────────────── */
+.metrics-row {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.metrics-row .metric-card {
+  flex: 1;
+  min-width: 120px;
+}
+
+.section-heading {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-ink);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+}

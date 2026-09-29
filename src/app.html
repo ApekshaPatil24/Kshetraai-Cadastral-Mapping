@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TERRA-CADASTRAL AI — Gujarat Sector 04 | Automated Cadastral Extraction & Verification</title>
+  <meta name="description" content="TERRA-CADASTRAL AI: AI-Based Automated Urban Parcel Mapping and Cadastral Feature Extraction System using Drone Imagery. Mission TC-2024-GJ04, Gujarat Sector 04." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- Design System -->
+  <link rel="stylesheet" href="./css/tokens.css" />
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/screens.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ══════════════════════════════════════════════════════
+       GLOBAL HEADER
+  ══════════════════════════════════════════════════════ -->
+  <header id="global-header">
+
+    <div class="header-brand">
+      <div class="header-brand-logo">
+        <svg id="brand-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+        </svg>
+      </div>
+      <div>
+        <div class="header-brand-name">TERRA-<span>CADASTRAL</span> AI</div>
+      </div>
+    </div>
+
+    <div class="header-divider"></div>
+
+    <div class="header-context">
+      <div class="header-context-region">Gujarat &bull; Sector 04</div>
+      <div class="header-context-mission">Mission TC-2024-GJ04 &nbsp;&middot;&nbsp; Chandkheda, Gandhinagar</div>
+    </div>
+
+    <div class="header-spacer"></div>
+
+    <div class="header-indicators">
+
+      <div class="status-indicator">
+        <div class="status-dot active" id="ai-engine-dot"></div>
+        <span>AI ENGINE</span>
+      </div>
+
+      <div class="header-divider" style="opacity:0.4"></div>
+
+      <div class="status-indicator">
+        <div class="status-dot active" style="background:var(--color-amber);box-shadow:0 0 0 2px rgba(217,173,88,0.3)"></div>
+        <span>GIS VALIDATION</span>
+      </div>
+
+      <div class="header-divider" style="opacity:0.4"></div>
+
+      <div class="rtk-badge">
+        <span class="rtk-badge-label">RTK</span>
+        <span class="rtk-badge-value">&plusmn;0.8 cm</span>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════
+       WORKFLOW INDICATOR BAR
+  ══════════════════════════════════════════════════════ -->
+  <div id="workflow-bar" role="navigation" aria-label="Processing workflow stages">
+
+    <div class="wf-stage completed" data-stage="1" onclick="navigateTo('s01-acquisition')">
+      <div class="wf-stage-inner">
+        <svg class="wf-stage-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <span class="wf-stage-num">01</span>
+        <span class="wf-stage-label">Acquisition</span>
+      </div>
+    </div>
+    <div class="wf-connector done"></div>
+
+    <div class="wf-stage completed" data-stage="2" onclick="navigateTo('s02-preprocess')">
+      <div class="wf-stage-inner">
+        <svg class="wf-stage-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
+        <span class="wf-stage-num">02</span>
+        <span class="wf-stage-label">Preprocess</span>
+      </div>
+    </div>
+    <div class="wf-connector done"></div>
+
+    <div class="wf-stage completed" data-stage="3" onclick="navigateTo('s03-ai-extract')">
+      <div class="wf-stage-inner">
+        <svg class="wf-stage-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        <span class="wf-stage-num">03</span>
+        <span class="wf-stage-label">AI Extract</span>
+      </div>
+    </div>
+    <div class="wf-connector done"></div>
+
+    <div class="wf-stage completed" data-stage="4" onclick="navigateTo('s04-vectorize')">
+      <div class="wf-stage-inner">
+        <svg class="wf-stage-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>
+        <span class="wf-stage-num">04</span>
+        <span class="wf-stage-label">Vectorize</span>
+      </div>
+    </div>
+    <div class="wf-connector done"></div>
+
+    <div class="wf-stage completed" data-stage="5" onclick="navigateTo('s05-parcels')">
+      <div class="wf-stage-inner">
+        <svg class="wf-stage-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span class="wf-stage-num">05</span>
+        <span class="wf-stage-label">Parcels</span>
+      </div>
+    </div>
+    <div class="wf-connector done"></div>
+
+    <div class="wf-stage completed" data-stage="6" onclick="navigateTo('s06-topology')">
+      <div class="wf-stage-inner">
+        <svg class="wf-stage-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span class="wf-stage-num">06</span>
+        <span class="wf-stage-label">Topology</span>
+      </div>
+    </div>
+    <div class="wf-connector done"></div>
+
+    <div class="wf-stage completed" data-stage="7" onclick="navigateTo('s07-confidence')">
+      <div class="wf-stage-inner">
+        <svg class="wf-stage-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span class="wf-stage-num">07</span>
+        <span class="wf-stage-label">Confidence</span>
+      </div>
+    </div>
+    <div class="wf-connector done"></div>
+
+    <div class="wf-stage completed" data-stage="8" onclick="navigateTo('s08-storage')">
+      <div class="wf-stage-inner">
+        <svg class="wf-stage-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        <span class="wf-stage-num">08</span>
+        <span class="wf-stage-label">Storage</span>
+      </div>
+    </div>
+    <div class="wf-connector done"></div>
+
+    <div class="wf-stage active" data-stage="9" onclick="navigateTo('s09-webgis')">
+      <div class="wf-stage-inner">
+        <svg class="wf-stage-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        <span class="wf-stage-num">09</span>
+        <span class="wf-stage-label">Web GIS</span>
+      </div>
+    </div>
+    <div class="wf-connector"></div>
+
+    <div class="wf-stage" data-stage="10" onclick="navigateTo('s10-review')">
+      <div class="wf-stage-inner">
+        <svg class="wf-stage-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <span class="wf-stage-num">10</span>
+        <span class="wf-stage-label">Human Review</span>
+      </div>
+    </div>
+    <div class="wf-connector"></div>
+
+    <div class="wf-stage" data-stage="11" onclick="navigateTo('s11-export')">
+      <div class="wf-stage-inner">
+        <svg class="wf-stage-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="wf-stage-num">11</span>
+        <span class="wf-stage-label">Export</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       MAIN LAYOUT
+  ══════════════════════════════════════════════════════ -->
+  <div id="main-layout">
+
+    <!-- LEFT SIDEBAR -->
+    <nav id="sidebar">
+
+      <div class="sidebar-section-label">Workflow</div>
+
+      <button class="nav-item" onclick="navigateTo('s01-acquisition')" id="nav-s01">
+        <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <span class="nav-item-text">Data Acquisition</span>
+        <span class="nav-item-badge green">OK</span>
+      </button>
+
+      <button class="nav-item" onclick="navigateTo('s02-preprocess')" id="nav-s02">
+        <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
+        <span class="nav-item-text">Preprocessing</span>
+        <span class="nav-item-badge green">OK</span>
+      </button>
+
+      <button class="nav-item" onclick="navigateTo('s03-ai-extract')" id="nav-s03">
+        <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        <span class="nav-item-text">AI Feature Extraction</span>
+        <span class="nav-item-badge green">OK</span>
+      </button>
+
+      <button class="nav-item" onclick="navigateTo('s04-vectorize')" id="nav-s04">
+        <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>
+        <span class="nav-item-text">Vectorize &amp; GIS Convert</span>
+        <span class="nav-item-badge green">OK</span>
+      </button>
+
+      <button class="nav-item" onclick="navigateTo('s05-parcels')" id="nav-s05">
+        <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span class="nav-item-text">Parcel Generation</span>
+        <span class="nav-item-badge green">1,247</span>
+      </button>
+
+      <button class="nav-item" onclick="navigateTo('s06-topology')" id="nav-s06">
+        <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span class="nav-item-text">Topology Validation</span>
+        <span class="nav-item-badge amber">23</span>
+      </button>
+
+      <button class="nav-item" onclick="navigateTo('s07-confidence')" id="nav-s07">
+        <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span class="nav-item-text">Confidence Scoring</span>
+        <span class="nav-item-badge coral">31</span>
+      </button>
+
+      <button class="nav-item" onclick="navigateTo('s08-storage')" id="nav-s08">
+        <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        <span class="nav-item-text">PostGIS Storage</span>
+        <span class="nav-item-badge green">OK</span>
+      </button>
+
+      <div class="sidebar-section-label" style="margin-top:var(--space-2)">Verification</div>
+
+      <button class="nav-item active" onclick="navigateTo('s09-webgis')" id="nav-s09">
+        <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        <span class="nav-item-text">Web GIS View</span>
+      </button>
+
+      <button class="nav-item" onclick="navigateTo('s10-review')" id="nav-s10">
+        <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <span class="nav-item-text">Human Review</span>
+        <span class="nav-item-badge amber">127</span>
+      </button>
+
+      <button class="nav-item" onclick="navigateTo('s11-export')" id="nav-s11">
+        <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="nav-item-text">GIS Export</span>
+      </button>
+
+      <div class="sidebar-spacer"></div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-db-indicator" onclick="navigateTo('s08-storage')" title="PostGIS database connection">
+          <div class="sidebar-db-dot"></div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div class="sidebar-db-label">PostGIS</div>
+            <div class="sidebar-db-name">EPSG:32643</div>
+          </div>
+        </div>
+      </div>
+
+    </nav>
+
+    <!-- SCREEN CONTAINER -->
+    <main id="screen-container">
+
+      <!-- Each screen is injected by screens.js -->
+      <div id="s01-acquisition" class="screen"></div>
+      <div id="s02-preprocess" class="screen"></div>
+      <div id="s03-ai-extract" class="screen"></div>
+      <div id="s04-vectorize" class="screen"></div>
+      <div id="s05-parcels" class="screen"></div>
+      <div id="s06-topology" class="screen"></div>
+      <div id="s07-confidence" class="screen"></div>
+      <div id="s08-storage" class="screen"></div>
+      <div id="s09-webgis" class="screen active"></div>
+      <div id="s10-review" class="screen"></div>
+      <div id="s11-export" class="screen"></div>
+
+    </main>
+
+  </div><!-- /main-layout -->
+
+</div><!-- /app -->
+
+<!-- Scripts -->
+<script src="../data/mock.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/screens/s09-webgis.js"></script>
+<script src="../js/screens/s01-acquisition.js"></script>
+<script src="../js/screens/s02-preprocess.js"></script>
+<script src="../js/screens/s03-ai-extract.js"></script>
+<script src="../js/screens/s04-vectorize.js"></script>
+<script src="../js/screens/s05-parcels.js"></script>
+<script src="../js/screens/s06-topology.js"></script>
+<script src="../js/screens/s07-confidence.js"></script>
+<script src="../js/screens/s08-storage.js"></script>
+<script src="../js/screens/s10-review.js"></script>
+<script src="../js/screens/s11-export.js"></script>
+<script>
+  // Init after DOM + Lucide ready
+  document.addEventListener('DOMContentLoaded', () => {
+    lucide.createIcons();
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+.top-header {
+  height: 56px;
+  background: var(--c-primary);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--sp-6);
+  gap: var(--sp-6);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 200;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.th-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.th-logo {
+  width: 28px;
+  height: 28px;
+  background: rgba(90, 174, 188, 0.08);
+  border: 1px solid rgba(90, 174, 188, 0.25);
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-cyan);
+}
+.th-logo svg {
+  width: 14px;
+  height: 14px;
+}
+
+.th-identity {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.th-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+}
+
+.th-subtitle {
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.02em;
+  margin-top: 2px;
+}
+
+.th-spacer {
+  flex: 1;
+}
+
+.th-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.th-system {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+.th-region {
+  font-size: 10px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.th-indicators {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.th-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.04em;
+}
+
+.th-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.th-dot.active {
+  background: var(--c-secondary);
+  box-shadow: 0 0 0 2px rgba(78, 143, 115, 0.25);
+  animation: pulse-dot 2.5s infinite;
+}
+.th-dot.warning {
+  background: var(--c-amber);
+  box-shadow: 0 0 0 2px rgba(217, 173, 88, 0.25);
+  animation: pulse-dot 3s infinite;
+}
+
+.th-rtk {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 6px;
+  background: rgba(90, 174, 188, 0.06);
+  border: 1px solid rgba(90, 174, 188, 0.2);
+  border-radius: var(--r-sm);
+  margin-left: 4px;
+}
+.th-rtk-label {
+  font-size: 9px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.04em;
+}
+.th-rtk-value {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--c-cyan);
+}
